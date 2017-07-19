@@ -22,13 +22,18 @@ exports.handler = (event, context, callback) => {
 			console.log(err, err.stack);
 		}
 		else {
+
 			var form = new formData();
 
 			form.append('access_token', message.access_token);
 			form.append('upload_phase', 'transfer');
 			form.append('start_offset', message.start_offset);
 			form.append('upload_session_id', message.upload_session_id);
-			form.append('video_file_chunk', data.Body);
+			form.append('video_file_chunk', data.Body, {
+				filename: 'demo.mp4',
+				contentType: 'video/mp4',
+				knownLength: message.end_offset - message.start_offset
+			});
 
 			var request = https.request({
 				method: 'post',
@@ -46,12 +51,12 @@ exports.handler = (event, context, callback) => {
 					var parsed = JSON.parse(chunk);
 
 					if (parsed.start_offset === parsed.end_offset) {
-						// Finished uploading
-						var topicArn = 'arn:aws:sns:ap-southeast-2:659947208484:upload';
+						// Nothing more to upload
+						var topicArn = 'arn:aws:sns:ap-southeast-2:659947208484:post';
 					}
 					else {
-						// Not finished uploading
-						var topicArm = 'arn:aws:sns:ap-southeast-2:659947208484:post';
+						// More chunks to send
+						var topicArn = 'arn:aws:sns:ap-southeast-2:659947208484:upload';
 					}
 
 					// TODO: Update to new syntax
