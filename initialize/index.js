@@ -6,7 +6,7 @@ const formData = require('form-data');
 exports.handler = (event, context, callback) => {
 
 	var message = JSON.parse(event.records[0].Sns.Message);
-	
+
 	var s3 = new AWS.S3({
 		apiVersion: '2006-03-01'
 	});
@@ -39,12 +39,12 @@ exports.handler = (event, context, callback) => {
 			request.on('response', (res) => {
 				res.on('data', (chunk) => {
 					console.log('Response: ' + chunk);
-        
+
 					var uploadSession = JSON.parse(chunk);
 				});
 			});
 
 			console.log(data);
-        }
-    });
+		}
+	});
 };
