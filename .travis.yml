@@ -6,4 +6,6 @@ install:
   - npm install --prefix upload
   - npm install --prefix post
 script:
-  - echo hello
+  - npm test --prefix initialize
+  - npm test --prefix upload
+  - npm test --prefix post
