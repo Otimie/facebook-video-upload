@@ -41,6 +41,27 @@ exports.handler = (event, context, callback) => {
 					console.log('Response: ' + chunk);
 
 					var uploadSession = JSON.parse(chunk);
+					uploadSession.access_token = message.access_token;
+
+					var sns = new AWS.SNS({
+						apiVersion: '2010-03-31'
+					});
+
+					var params = {
+						Message: JSON.stringify(uploadSession),
+						TopicArn: 'arn:aws:sns:ap-southeast-2:659947208484:upload'
+					};
+
+					sns.publish(params, function(error, data) {
+						if (error) {
+							console.log(error, error.stack);
+						}
+						else {
+							console.log(data);
+							callback(null, 'Hello from Lambda');
+						}
+					});
+
 				});
 			});
 
