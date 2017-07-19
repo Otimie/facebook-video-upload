@@ -4,13 +4,7 @@ const AWS = require('aws-sdk');
 
 exports.handler = (event, context, callback) => {
 
-	var clientId = '790758024391635';
-	var secret = '9e45171393bd1ec9812f0c218f8d28af';
-
-	var videoId = event.pathParameters.videoId;
-	var code = event.queryStringParameters.code;
-
-	var path = '/v2.10/oauth/access_token?client_id=' + clientId + '&redirect_uri=https://api.vidulo.com/facebook/' + videoId + '&client_secret=' + secret + '&code=' + code;
+	var path = '/v2.10/oauth/access_token?client_id=' + process.env.clientId + '&redirect_uri=https://api.vidulo.com/facebook/' + event.pathParameters.videoId + '&client_secret=' + process.env.clientSecret + '&code=' + event.queryStringParameters.code;
 
 	var options = {
 		host: 'graph.facebook.com',
@@ -47,13 +41,13 @@ exports.handler = (event, context, callback) => {
 					callback(null, {
 						"isBase64Encoded": false,
 						"statusCode": 302,
-						"headers": { "Location": "http://www.vidulo.com"}
+						"headers": {
+							"Location": "http://www.vidulo.com"
+						}
 					});
 				}
 			});
 		});
 	}
-
 	https.request(options, callback123).end();
-
 };
