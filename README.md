@@ -1,1 +1,1 @@
-# facebook-video-upload
+# facebook-video-upload [![Build Status](https://travis-ci.com/Anthropomorphism/facebook-video-upload.svg?token=Dwwz3yqQMLyXVEkTpp5V&branch=master)](https://travis-ci.com/Anthropomorphism/facebook-video-upload)
