@@ -55,15 +55,15 @@ exports.handler = (event, context, callback) => {
 					}
 
 					// TODO: Update to new syntax
-					uploadSession.start_offset = parsed.start_offset;
-					uploadSession.end_offset = parsed.end_offset;
+					message.start_offset = parsed.start_offset;
+					message.end_offset = parsed.end_offset;
 
 					var sns = new AWS.SNS({
 						apiVersion: '2010-03-31'
 					});
 
 					var params = {
-						Message: JSON.stringify(uploadSession),
+						Message: JSON.stringify(message),
 						TopicArn: topicArn
 					};
 
