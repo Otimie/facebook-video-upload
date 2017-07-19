@@ -77,7 +77,7 @@ exports.handler = (event, context, callback) => {
 						}
 						else {
 							console.log(data);
-							callback(null, 'Hello from Lambda');
+							callback(null);
 						}
 					});
 				});
