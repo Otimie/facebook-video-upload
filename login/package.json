@@ -6,5 +6,6 @@
 	},
 	"dependencies": {
 		"aws-sdk": "2.86.0",
-	}
+	},
+	"private": true
 }

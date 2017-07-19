@@ -6,5 +6,6 @@
 	},
 	"dependencies": {
 		"form-data": "2.2.0"
-	}
+	},
+	"private": true
 }
