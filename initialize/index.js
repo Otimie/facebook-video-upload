@@ -16,9 +16,9 @@ exports.handler = (event, context, callback) => {
 		Key: "demo.mp4"
 	};
 
-	s3.headObject(params, (err, data) => {
-		if (err) {
-			console.log(err, err.stack);
+	s3.headObject(params, (error, data) => {
+		if (error) {
+			console.log(error, error.stack);
 		}
 		else {
 			var form = new formData;
