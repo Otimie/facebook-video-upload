@@ -22,7 +22,6 @@ exports.handler = (event, context, callback) => {
 			console.log(err, err.stack);
 		}
 		else {
-
 			var form = new formData();
 
 			form.append('access_token', message.access_token);
