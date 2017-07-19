@@ -1,7 +1,11 @@
 {
 	"name": "initialize",
 	"version": "1.0.0",
+	"scripts": {
+		"test": "node index.js"
+	},
 	"dependencies": {
+		"aws-sdk": "2.86.0",
 		"form-data": "2.2.0"
 	}
 }
