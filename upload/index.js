@@ -17,9 +17,9 @@ exports.handler = (event, context, callback) => {
 		Range: 'bytes=' + message.start_offset + '-' + message.end_offset
 	};
 
-	s3.getObject(params, function(err, data) {
-		if (err) {
-			console.log(err, err.stack);
+	s3.getObject(params, function(error, data) {
+		if (error) {
+			callback(error);
 		}
 		else {
 			var form = new formData();
@@ -71,12 +71,11 @@ exports.handler = (event, context, callback) => {
 						TopicArn: topicArn
 					};
 
-					sns.publish(params, function(err, data) {
-						if (err) {
-							console.log(err, err.stack);
+					sns.publish(params, function(error, data) {
+						if (error) {
+							callback(error);
 						}
 						else {
-							console.log(data);
 							callback(null, 'Hello from Lambda');
 						}
 					});
