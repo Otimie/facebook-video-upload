@@ -1,3 +1,7 @@
 language: node_js
 node_js:
   - "6.10"
+install:
+  - npm install --prefix initialize
+  - npm install --prefix upload
+  - npm install --prefix post
