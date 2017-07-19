@@ -9,9 +9,7 @@ exports.handler = (event, context, callback) => {
     
     var videoId = event.pathParameters.videoId;
     var code = event.queryStringParameters.code;
-    
-    // https://graph.facebook.com/v2.10/oauth/access_token?client_id={app-id}&redirect_uri={redirect-uri}&client_secret={app-secret}&code={code-parameter}
-    
+        
     var path = '/v2.10/oauth/access_token?client_id=' + clientId + '&redirect_uri=https://api.vidulo.com/facebook/' + videoId + '&client_secret=' + secret + '&code=' + code;
     
     var options = {
@@ -29,12 +27,6 @@ exports.handler = (event, context, callback) => {
         
         //the whole response has been recieved, so we just print it out here
         response.on('end', function () {
-            //console.log(str);
-            
-            //var parsed = JSON.parse(str);
-            
-            // parsed.access_token
-            
             
             var sns = new AWS.SNS({
 				apiVersion: '2010-03-31'
@@ -53,15 +45,10 @@ exports.handler = (event, context, callback) => {
 					console.log(data);
 					
 					callback(null, {
-                        "isBase64Encoded": false,
-                        "statusCode": 302,
-                        "headers": { "Location": "http://www.vidulo.com"}
-                        //"body": "..."
-                        
-                        //"body": JSON.stringify(str)
-                    });
-					
-					callback(null, 'Hello from Lambda');
+						"isBase64Encoded": false,
+						"statusCode": 302,
+						"headers": { "Location": "http://www.vidulo.com"}
+					});
 				}
 			});
         });
