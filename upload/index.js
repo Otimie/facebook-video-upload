@@ -14,7 +14,7 @@ exports.handler = (event, context, callback) => {
 	var params = {
 		Bucket: 'video-repository-vl7bfe',
 		Key: 'demo.mp4',
-		Range: 'bytes=' + start_offset + '-' + end_offset
+		Range: 'bytes=' + message.start_offset + '-' + message.end_offset
 	};
 
 	s3.getObject(params, function(err, data) {
