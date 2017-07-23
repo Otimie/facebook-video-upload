@@ -11,16 +11,16 @@ exports.handler = (event, context, callback) => {
 		path: path
 	};
 
-	callback123 = function (response) {
+	callback123 = (response) => {
 		var str = '';
 
 		//another chunk of data has been recieved, so append it to `str`
-		response.on('data', function (chunk) {
+		response.on('data', (chunk) => {
 			str += chunk;
 		});
 
 		//the whole response has been recieved, so we just print it out here
-		response.on('end', function () {
+		response.on('end', () => {
 
 			var sns = new AWS.SNS({
 				apiVersion: '2010-03-31'
@@ -31,7 +31,7 @@ exports.handler = (event, context, callback) => {
 				TopicArn: 'arn:aws:sns:ap-southeast-2:659947208484:initialize'
 			};
 
-			sns.publish(params, function(error, data) {
+			sns.publish(params, (error, data) => {
 				if (error) {
 					console.log(error, error.stack);
 				}
