@@ -13,7 +13,7 @@ exports.handler = (event, context, callback) => {
 
 	var params = {
 		Bucket: "video-repository-vl7bfe",
-		Key: "demo.mp4"
+		Key: message.key
 	};
 
 	s3.headObject(params, (error, data) => {
@@ -45,6 +45,7 @@ exports.handler = (event, context, callback) => {
 					var uploadSession = JSON.parse(chunk);
 					uploadSession.access_token = message.access_token;
 					uploadSession.node_id = node_id;
+					uploadSession.key = message.key;
 
 					var sns = new AWS.SNS({
 						apiVersion: '2010-03-31'

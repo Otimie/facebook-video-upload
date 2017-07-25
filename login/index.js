@@ -13,7 +13,7 @@ exports.handler = (event, context, callback) => {
 			path: path
 		};
 
-		callback123 = (response) => {
+		https.request(options, (response) => {
 			var str = '';
 
 			//another chunk of data has been recieved, so append it to `str`
@@ -23,13 +23,17 @@ exports.handler = (event, context, callback) => {
 
 			//the whole response has been recieved, so we just print it out here
 			response.on('end', () => {
+				
+				var decoded = JSON.parse(str);
+				
+				decoded.key = event.pathParameters.videoId + '.mp4';
 
 				var sns = new AWS.SNS({
 					apiVersion: '2010-03-31'
 				});
 
 				var params = {
-					Message: str,
+					Message: JSON.stringify(str),
 					TopicArn: 'arn:aws:sns:ap-southeast-2:659947208484:initialize'
 				};
 
@@ -50,8 +54,7 @@ exports.handler = (event, context, callback) => {
 					}
 				});
 			});
-		}
-		https.request(options, callback123).end();
+		}).end();
 	}
 	else {
 		callback(null, {

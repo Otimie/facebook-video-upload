@@ -13,7 +13,7 @@ exports.handler = (event, context, callback) => {
 
 	var params = {
 		Bucket: 'video-repository-vl7bfe',
-		Key: 'demo.mp4',
+		Key: message.key,
 		Range: 'bytes=' + message.start_offset + '-' + message.end_offset
 	};
 
