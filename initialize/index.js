@@ -44,7 +44,7 @@ exports.handler = (event, context, callback) => {
 
 					var uploadSession = JSON.parse(chunk);
 					uploadSession.access_token = message.access_token;
-					uploadSession.node_id = nodeId;
+					uploadSession.node_id = node_id;
 
 					var sns = new AWS.SNS({
 						apiVersion: '2010-03-31'
