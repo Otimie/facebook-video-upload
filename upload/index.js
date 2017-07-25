@@ -30,7 +30,7 @@ exports.handler = (event, context, callback) => {
 			form.append('upload_session_id', message.upload_session_id);
 			form.append('video_file_chunk', data.Body, {
 				filename: 'demo.mp4',
-				contentType: 'video/mp4',
+				contentType: data.ContentType,
 				knownLength: message.end_offset - message.start_offset
 			});
 
