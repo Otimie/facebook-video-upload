@@ -11,7 +11,7 @@ exports.handler = (event, context, callback) => {
 	form.append('access_token', message.access_token);
 	form.append('upload_phase', 'finish');
 	form.append('upload_session_id', message.upload_session_id);
-	
+
 	var request = https.request({
 		method: 'post',
 		host: 'graph-video.facebook.com',
