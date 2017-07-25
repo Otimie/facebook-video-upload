@@ -12,10 +12,12 @@ exports.handler = (event, context, callback) => {
 	form.append('upload_phase', 'finish');
 	form.append('upload_session_id', message.upload_session_id);
 
+	const nodeId = 'me';
+	
 	var request = https.request({
 		method: 'post',
 		host: 'graph-video.facebook.com',
-		path: '/v2.10/me/videos',
+		path: '/v2.10/' + nodeId + '/videos',
 		headers: form.getHeaders()
 	});
 
