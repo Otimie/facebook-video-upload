@@ -34,10 +34,12 @@ exports.handler = (event, context, callback) => {
 				knownLength: message.end_offset - message.start_offset
 			});
 
+			const nodeId = 'me';
+			
 			var request = https.request({
 				method: 'post',
 				host: 'graph-video.facebook.com',
-				path: '/v2.10/me/videos',
+				path: '/v2.10/' + nodeId + '/videos',
 				headers: form.getHeaders()
 			});
 
