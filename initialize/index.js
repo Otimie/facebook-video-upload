@@ -27,12 +27,12 @@ exports.handler = (event, context, callback) => {
 			form.append('upload_phase', 'start');
 			form.append('file_size', data.ContentLength);
 
-			var nodeId = 'me';
+			var node_id = 'me';
 			
 			var request = https.request({
 				method: 'post',
 				host: 'graph-video.facebook.com',
-				path: '/v2.10/' + nodeId + '/videos',
+				path: '/v2.10/' + node_id + '/videos',
 				headers: form.getHeaders()
 			});
 
