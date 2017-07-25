@@ -23,13 +23,17 @@ exports.handler = (event, context, callback) => {
 
 			//the whole response has been recieved, so we just print it out here
 			response.on('end', () => {
+				
+				var decoded = JSON.parse(str);
+				
+				decoded.key = event.pathParameters.videoId + '.mp4';
 
 				var sns = new AWS.SNS({
 					apiVersion: '2010-03-31'
 				});
 
 				var params = {
-					Message: str,
+					Message: JSON.stringify(str),
 					TopicArn: 'arn:aws:sns:ap-southeast-2:659947208484:initialize'
 				};
 
