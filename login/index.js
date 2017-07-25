@@ -33,7 +33,7 @@ exports.handler = (event, context, callback) => {
 				});
 
 				var params = {
-					Message: JSON.stringify(str),
+					Message: JSON.stringify(decoded),
 					TopicArn: 'arn:aws:sns:ap-southeast-2:659947208484:initialize'
 				};
 
