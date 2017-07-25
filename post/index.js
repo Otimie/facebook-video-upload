@@ -15,7 +15,7 @@ exports.handler = (event, context, callback) => {
 	var request = https.request({
 		method: 'post',
 		host: 'graph-video.facebook.com',
-		path: '/v2.10/me/videos',
+		path: '/v2.10/' + message.node_id + '/videos',
 		headers: form.getHeaders()
 	});
 
