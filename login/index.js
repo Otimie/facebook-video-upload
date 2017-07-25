@@ -13,7 +13,7 @@ exports.handler = (event, context, callback) => {
 			path: path
 		};
 
-		callback123 = (response) => {
+		https.request(options, (response) => {
 			var str = '';
 
 			//another chunk of data has been recieved, so append it to `str`
@@ -50,8 +50,7 @@ exports.handler = (event, context, callback) => {
 					}
 				});
 			});
-		}
-		https.request(options, callback123).end();
+		}).end();
 	}
 	else {
 		callback(null, {
