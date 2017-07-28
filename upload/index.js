@@ -82,6 +82,10 @@ exports.handler = (event, context, callback) => {
 					});
 				});
 			});
+			
+			request.on('error', (error) => {
+				callback(error);
+			});
 		}
 	});
 };
