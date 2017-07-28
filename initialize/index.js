@@ -31,13 +31,11 @@ exports.handler = (event, context, callback) => {
 			form.append('access_token', message.access_token);
 			form.append('upload_phase', 'start');
 			form.append('file_size', data.ContentLength);
-
-			var node_id = 'me';
 			
 			var request = https.request({
 				method: 'post',
 				host: 'graph-video.facebook.com',
-				path: '/v2.10/' + node_id + '/videos',
+				path: '/v2.10/' + message.node_id + '/videos',
 				headers: form.getHeaders()
 			});
 
@@ -49,7 +47,7 @@ exports.handler = (event, context, callback) => {
 
 					var uploadSession = JSON.parse(chunk);
 					uploadSession.access_token = message.access_token;
-					uploadSession.node_id = node_id;
+					uploadSession.node_id = message.node_id;
 					uploadSession.key = message.key;
 					uploadSession.bucket = message.bucket;
 
