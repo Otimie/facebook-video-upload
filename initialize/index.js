@@ -12,7 +12,7 @@ exports.handler = (event, context, callback) => {
 	});
 
 	var params = {
-		Bucket: "video-repository-vl7bfe",
+		Bucket: message.bucket,
 		Key: message.key
 	};
 
