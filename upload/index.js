@@ -51,11 +51,12 @@ exports.handler = (event, context, callback) => {
 
 					if (parsed.start_offset === parsed.end_offset) {
 						// Nothing more to upload
-						var topicArn = 'arn:aws:sns:ap-southeast-2:659947208484:post';
+						var functionName = 'arn:aws:sns:ap-southeast-2:659947208484:post';
 					}
 					else {
 						// More chunks to send
-						var topicArn = 'arn:aws:sns:ap-southeast-2:659947208484:upload';
+						var functionName = context.functionName;
+						var qualifier = context.functionVersion;
 					}
 
 					// TODO: Update to new syntax
@@ -70,10 +71,7 @@ exports.handler = (event, context, callback) => {
 						FunctionName: topicArn,
 						InvocationType: 'Event',
 						Payload: JSON.stringify(message),
-						Qualifier: '1',
-						
-						Message: JSON.stringify(message),
-						TopicArn: topicArn
+						Qualifier: qualifier
 					};
 
 					lambda.invoke(params, function(error, data) {
