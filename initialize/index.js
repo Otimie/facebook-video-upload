@@ -18,7 +18,12 @@ exports.handler = (event, context, callback) => {
 
 	s3.headObject(params, (error, data) => {
 		if (error) {
-			console.log(error, error.stack);
+			if (error.code === 'NotFound') {
+			    callback(new Error('File Not Found'));
+			}
+			else {
+			    console.log(error, error.stack);
+			}
 		}
 		else {
 			var form = new formData;
@@ -61,15 +66,11 @@ exports.handler = (event, context, callback) => {
 							console.log(error, error.stack);
 						}
 						else {
-							console.log(data);
 							callback(null);
 						}
 					});
-
 				});
 			});
-
-			console.log(data);
 		}
 	});
 };
