@@ -51,6 +51,7 @@ exports.handler = (event, context, callback) => {
 					uploadSession.access_token = message.access_token;
 					uploadSession.node_id = node_id;
 					uploadSession.key = message.key;
+					uploadSession.bucket = message.bucket;
 
 					var sns = new AWS.SNS({
 						apiVersion: '2010-03-31'
