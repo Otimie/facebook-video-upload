@@ -26,6 +26,7 @@ exports.handler = (event, context, callback) => {
 				
 				var decoded = JSON.parse(str);
 				
+				decoded.node_id = 'me';
 				decoded.key = event.pathParameters.videoId + '.mp4';
 				decoded.bucket = 'video-repository-vl7bfe';
 
