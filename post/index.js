@@ -26,4 +26,8 @@ exports.handler = (event, context, callback) => {
 			callback(null);
 		});
 	});
+	
+	request.on('error', (error) => {
+		callback(error);
+	});
 };
