@@ -67,16 +67,20 @@ exports.handler = (event, context, callback) => {
 					});
 
 					var params = {
+						FunctionName: topicArn,
+						InvocationType: 'Event',
+						Payload: JSON.stringify(message),
+						Qualifier: '1',
+						
 						Message: JSON.stringify(message),
 						TopicArn: topicArn
 					};
 
-					sns.publish(params, function(err, data) {
-						if (err) {
-							console.log(err, err.stack);
+					lambda.invoke(params, function(error, data) {
+						if (error) {
+							callback(error);
 						}
 						else {
-							console.log(data);
 							callback(null);
 						}
 					});
