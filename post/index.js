@@ -11,6 +11,14 @@ exports.handler = (event, context, callback) => {
 	form.append('access_token', message.access_token);
 	form.append('upload_phase', 'finish');
 	form.append('upload_session_id', message.upload_session_id);
+	
+	if (message.description) {
+		form.append('description', message.description);
+	}
+	
+	if (message.title) {
+		form.append('title', message.title);
+	}
 
 	var request = https.request({
 		method: 'post',
@@ -25,5 +33,9 @@ exports.handler = (event, context, callback) => {
 		response.on('data', (data) => {
 			callback(null);
 		});
+	});
+	
+	request.on('error', (error) => {
+		callback(error);
 	});
 };
