@@ -27,6 +27,7 @@ exports.handler = (event, context, callback) => {
 				var decoded = JSON.parse(str);
 				
 				decoded.key = event.pathParameters.videoId + '.mp4';
+				decoded.bucket = 'video-repository-vl7bfe';
 
 				var sns = new AWS.SNS({
 					apiVersion: '2010-03-31'
