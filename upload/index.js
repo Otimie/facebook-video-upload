@@ -61,9 +61,9 @@ exports.handler = (event, context, callback) => {
 					// TODO: Update to new syntax
 					message.start_offset = parsed.start_offset;
 					message.end_offset = parsed.end_offset;
-
-					var sns = new AWS.SNS({
-						apiVersion: '2010-03-31'
+					
+					var lambda = new AWS.Lambda({
+						apiVersion: '2015-03-31'
 					});
 
 					var params = {
