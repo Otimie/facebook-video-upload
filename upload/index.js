@@ -51,32 +51,34 @@ exports.handler = (event, context, callback) => {
 
 					if (parsed.start_offset === parsed.end_offset) {
 						// Nothing more to upload
-						var topicArn = 'arn:aws:sns:ap-southeast-2:659947208484:post';
+						var functionName = 'arn:aws:sns:ap-southeast-2:659947208484:post';
 					}
 					else {
 						// More chunks to send
-						var topicArn = 'arn:aws:sns:ap-southeast-2:659947208484:upload';
+						var functionName = context.functionName;
+						var qualifier = context.functionVersion;
 					}
 
 					// TODO: Update to new syntax
 					message.start_offset = parsed.start_offset;
 					message.end_offset = parsed.end_offset;
-
-					var sns = new AWS.SNS({
-						apiVersion: '2010-03-31'
+					
+					var lambda = new AWS.Lambda({
+						apiVersion: '2015-03-31'
 					});
 
 					var params = {
-						Message: JSON.stringify(message),
-						TopicArn: topicArn
+						FunctionName: topicArn,
+						InvocationType: 'Event',
+						Payload: JSON.stringify(message),
+						Qualifier: qualifier
 					};
 
-					sns.publish(params, function(err, data) {
-						if (err) {
-							console.log(err, err.stack);
+					lambda.invoke(params, function(error, data) {
+						if (error) {
+							callback(error);
 						}
 						else {
-							console.log(data);
 							callback(null);
 						}
 					});
