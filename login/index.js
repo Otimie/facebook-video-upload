@@ -46,11 +46,7 @@ exports.handler = (event, context, callback) => {
 						console.log(data);
 
 						callback(null, {
-							"isBase64Encoded": false,
-							"statusCode": 302,
-							"headers": {
-								"Location": "https://demo.vidulo.com/facebook/successful"
-							}
+							Location: 'https://demo.vidulo.com/facebook/successful'
 						});
 					}
 				});
@@ -59,11 +55,7 @@ exports.handler = (event, context, callback) => {
 	}
 	else {
 		callback(null, {
-			"isBase64Encoded": false,
-			"statusCode": 302,
-			"headers": {
-				"Location": "https://demo.vidulo.com/facebook/unsuccessful"
-			}
+			Location: 'https://demo.vidulo.com/facebook/unsuccessful'
 		});
 	}
 };
