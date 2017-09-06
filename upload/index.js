@@ -3,13 +3,17 @@ const https = require('https');
 const AWS = require('aws-sdk');
 const formData = require('form-data');
 
+var s3 = new AWS.S3({
+	apiVersion: '2006-03-01'
+});
+
+var sns = new AWS.SNS({
+	apiVersion: '2010-03-31'
+});
+
 exports.handler = (event, context, callback) => {
 
 	var message = JSON.parse(event.Records[0].Sns.Message);
-
-	var s3 = new AWS.S3({
-		apiVersion: '2006-03-01'
-	});
 
 	var params = {
 		Bucket: message.bucket,
@@ -61,10 +65,6 @@ exports.handler = (event, context, callback) => {
 					// TODO: Update to new syntax
 					message.start_offset = parsed.start_offset;
 					message.end_offset = parsed.end_offset;
-
-					var sns = new AWS.SNS({
-						apiVersion: '2010-03-31'
-					});
 
 					var params = {
 						Message: JSON.stringify(message),
