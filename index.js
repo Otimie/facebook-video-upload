@@ -56,6 +56,7 @@ function start(event, context, callback) {
 					payload.node_id = node_id;
 					payload.key = event.key;
 					payload.bucket = event.bucket;
+					// TODO: Phase: transfer
 
 					var params = {
 						FunctionName: context.functionName,
@@ -119,40 +120,29 @@ function transfer(event, context, callback) {
 
 				response.on('end', () => {
 
-					var parsed = JSON.parse(chunk);
+					// Populate start_offset & end_offset
+					var payload = JSON.parse(body);
 
 					if (parsed.start_offset === parsed.end_offset) {
 						// Nothing more to upload
-						var topicArn = 'arn:aws:sns:ap-southeast-2:659947208484:post';
+						payload.phase = 'finish';
 					}
 					else {
 						// More chunks to send
-						var topicArn = 'arn:aws:sns:ap-southeast-2:659947208484:upload';
+						payload.phase = 'transfer';
 					}
 
 					// TODO: Update to new syntax
-					message.start_offset = parsed.start_offset;
-					message.end_offset = parsed.end_offset;
+					payload.start_offset = event.start_offset;
+					payload.end_offset = event.end_offset;
 
-					//var params = {
-					//	Message: JSON.stringify(message),
-					//	TopicArn: topicArn
-					//};
 					var params = {
 						FunctionName: context.functionName,
 						InvocationType: 'Event',
 						Payload: JSON.stringify(payload),
 						Qualifier: context.functionVersion
 					}
-
-					//sns.publish(params, function(error, data) {
-					//	if (error) {
-					//		callback(error);
-					//	}
-					//	else {
-					//		callback(null);
-					//	}
-					//});
+					
 					lambda.invoke(params, (error, data) => {
 						if (error) {
 							callback(error);
@@ -188,22 +178,22 @@ function finish(event, context, callback) {
 	
 	var form = new formData();
 
-	form.append('access_token', message.access_token);
+	form.append('access_token', event.access_token);
 	form.append('upload_phase', 'finish');
-	form.append('upload_session_id', message.upload_session_id);
+	form.append('upload_session_id', event.upload_session_id);
 	
-	if (message.description) {
-		form.append('description', message.description);
+	if (event.description) {
+		form.append('description', event.description);
 	}
 	
-	if (message.title) {
-		form.append('title', message.title);
+	if (event.title) {
+		form.append('title', event.title);
 	}
 
 	var request = https.request({
 		method: 'post',
 		host: 'graph-video.facebook.com',
-		path: '/v2.10/' + message.node_id + '/videos',
+		path: '/v2.10/' + event.node_id + '/videos',
 		headers: form.getHeaders()
 	});
 
