@@ -49,7 +49,7 @@ function start(event, context, callback) {
 					payload.node_id = event.node_id;
 					payload.key = event.key;
 					payload.bucket = event.bucket;
-					// TODO: Phase: transfer
+					payload.phase = 'transfer'
 
 					var params = {
 						FunctionName: context.functionName,
