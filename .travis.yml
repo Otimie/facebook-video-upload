@@ -2,12 +2,6 @@ language: node_js
 node_js:
   - "6.10"
 install:
-  - npm install --prefix login
-  - npm install --prefix initialize
-  - npm install --prefix upload
-  - npm install --prefix post
+  - npm install
 script:
-  - npm test --prefix login
-  - npm test --prefix initialize
-  - npm test --prefix upload
-  - npm test --prefix post
+  - npm test
