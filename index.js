@@ -63,7 +63,7 @@ function transfer(event, context, callback) {
 		else {
 			// TODO
 		}
-	}
+	});
 }
 
 function finish(event, context, callback) {
