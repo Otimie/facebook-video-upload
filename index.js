@@ -136,7 +136,7 @@ function transfer(event, context, callback) {
 						InvocationType: 'Event',
 						Payload: JSON.stringify(payload),
 						Qualifier: context.functionVersion
-					}
+					};
 					
 					lambda.invoke(params, (error, data) => {
 						if (error) {
