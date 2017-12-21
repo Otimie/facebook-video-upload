@@ -49,14 +49,15 @@ function start(event, context, callback) {
 					payload.node_id = event.node_id;
 					payload.key = event.key;
 					payload.bucket = event.bucket;
-					payload.phase = 'transfer'
+					payload.phase = 'transfer';
 
 					var params = {
 						FunctionName: context.functionName,
 						InvocationType: 'Event',
 						Payload: JSON.stringify(payload),
 						Qualifier: context.functionVersion
-					}
+					};
+					
 					lambda.invoke(params, (error, data) => {
 						if (error) {
 							callback(error);
@@ -117,7 +118,7 @@ function transfer(event, context, callback) {
 					// Populate start_offset & end_offset
 					var payload = JSON.parse(body);
 
-					if (parsed.start_offset === parsed.end_offset) {
+					if (payload.start_offset === payload.end_offset) {
 						// Nothing more to upload
 						payload.phase = 'finish';
 					}
