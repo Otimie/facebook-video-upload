@@ -7,15 +7,27 @@ const lambda = new AWS.Lambda({apiVersion: '2015-03-31'});
 const s3 = new AWS.S3({apiVersion: '2006-03-01'});
 
 function start(event, context, callback) {
-
+	var params = {
+		Bucket: event.Bucket,
+		Key: event.Key
+	};
+	
+	s3.headObject(params, (error, data) => {
+		if (error) {
+			callback(error);
+		}
+		else {
+			// TODO
+		}
+	});
 }
 
 function transfer(event, context, callback) {
-
+	// TODO
 }
 
 function finish(event, context, callback) {
-
+	// TODO
 }
 
 exports.handler = (event, context, callback) => {
