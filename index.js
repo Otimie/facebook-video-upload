@@ -3,19 +3,15 @@ const https = require('https');
 const AWS = require('aws-sdk');
 const formData = require('form-data');
 
-const s3 = new AWS.S3({
-	apiVersion: '2006-03-01'
-});
-
-const lambda = new AWS.Lambda({
-	apiVersion: '2015-03-31'
-});
+const lambda = new AWS.Lambda({apiVersion: '2015-03-31'});
+const s3 = new AWS.S3({apiVersion: '2006-03-01'});
 
 function start(event, context, callback) {
 	var params = {
 		Bucket: event.bucket,
 		Key: event.key
 	};
+	
 	s3.headObject(params, (error, data) => {
 		if (error) {
 			callback(error);
@@ -84,6 +80,7 @@ function transfer(event, context, callback) {
 		Key: event.key,
 		Range: 'bytes=' + event.start_offset + '-' + event.end_offset
 	};
+	
 	s3.getObject(params, (error, data) => {
 		if (error) {
 			callback(error);
@@ -154,28 +151,10 @@ function transfer(event, context, callback) {
 				});
 			});
 		}
-	});
-	
-	
-	
-	
-	
-	
-	
-	
+	});	
 }
 
 function finish(event, context, callback) {
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	var form = new formData();
 
 	form.append('access_token', event.access_token);
@@ -210,15 +189,6 @@ function finish(event, context, callback) {
 			callback(null);
 		});
 	});
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
 
 exports.handler = (event, context, callback) => {
