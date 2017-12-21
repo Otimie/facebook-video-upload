@@ -43,7 +43,7 @@ function start(event, context, callback) {
 				
 				response.on('end', () => {
 					// TODO	
-				}
+				});
 			}
 		}
 	});
