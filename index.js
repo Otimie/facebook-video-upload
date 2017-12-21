@@ -50,7 +50,20 @@ function start(event, context, callback) {
 }
 
 function transfer(event, context, callback) {
-	// TODO
+	var params = {
+		Bucket: event.Bucket,
+		Key: event.Key,
+		Range: 'bytes=' + event.start_offset + '-' + event.end_offset
+	};
+
+	s3.getObject(params, (error, data) => {
+		if (error) {
+			callback(error);
+		}
+		else {
+			// TODO
+		}
+	}
 }
 
 function finish(event, context, callback) {
