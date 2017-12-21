@@ -22,14 +22,11 @@ function start(event, context, callback) {
 			form.append('access_token', event.access_token);
 			form.append('upload_phase', 'start');
 			form.append('file_size', data.ContentLength);
-
-			// TODO: Change from 'me' to event.???
-			var node_id = 'me';
 			
 			var request = https.request({
 				method: 'POST',
 				host: 'graph-video.facebook.com',
-				path: '/v2.10/' + node_id + '/videos',
+				path: '/v2.10/' + event.node_id + '/videos',
 				headers: form.getHeaders()
 			});
 
@@ -49,7 +46,7 @@ function start(event, context, callback) {
 					var payload = JSON.parse(body);
 
 					payload.access_token = event.access_token;
-					payload.node_id = node_id;
+					payload.node_id = event.node_id;
 					payload.key = event.key;
 					payload.bucket = event.bucket;
 					// TODO: Phase: transfer
