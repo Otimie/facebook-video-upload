@@ -17,7 +17,34 @@ function start(event, context, callback) {
 			callback(error);
 		}
 		else {
-			// TODO
+			var form = new formData;
+
+			form.append('access_token', event.access_token);
+			form.append('upload_phase', 'start');
+			form.append('file_size', data.ContentLength);
+			
+			var node_id = event.node_id;
+			
+			var request = https.request({
+				method: 'POST',
+				host: 'graph-video.facebook.com',
+				path: '/v2.10/' + node_id + '/videos',
+				headers: form.getHeaders()
+			});
+			
+			form.pipe(request);
+			
+			request.on('response', (response) => {
+				var body = '';
+				
+				response.on('data', (data) => {
+					body += data;
+				});
+				
+				response.on('end', () => {
+					// TODO	
+				}
+			}
 		}
 	});
 }
