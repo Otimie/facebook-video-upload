@@ -6,6 +6,18 @@ const formData = require('form-data');
 const lambda = new AWS.Lambda({apiVersion: '2015-03-31'});
 const s3 = new AWS.S3({apiVersion: '2006-03-01'});
 
+function start(event, context, callback) {
+
+}
+
+function transfer(event, context, callback) {
+
+}
+
+function finish(event, context, callback) {
+
+}
+
 exports.handler = (event, context, callback) => {
 	switch (event.phase) {
 		// Start
