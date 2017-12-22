@@ -45,16 +45,14 @@ function start(event, context, callback) {
 					// Populate upload_session_id, video_id, start_offset & end_offset
 					var payload = JSON.parse(body);
 
-					payload.access_token = event.access_token;
-					payload.node_id = event.node_id;
-					payload.key = event.key;
-					payload.bucket = event.bucket;
-					payload.phase = 'transfer';
-
+					Object.assign(event, payload);
+					
+					event.phase = 'transfer';
+										
 					var params = {
 						FunctionName: context.functionName,
 						InvocationType: 'Event',
-						Payload: JSON.stringify(payload),
+						Payload: JSON.stringify(event),
 						Qualifier: context.functionVersion
 					};
 					
@@ -117,24 +115,18 @@ function transfer(event, context, callback) {
 
 					// Populate start_offset & end_offset
 					var payload = JSON.parse(body);
+					
+					Object.assign(event, payload);
 
-					if (payload.start_offset === payload.end_offset) {
+					if (event.start_offset === event.end_offset) {
 						// Nothing more to upload
-						payload.phase = 'finish';
+						event.phase = 'finish';
 					}
-					else {
-						// More chunks to send
-						payload.phase = 'transfer';
-					}
-
-					// TODO: Update to new syntax
-					payload.start_offset = event.start_offset;
-					payload.end_offset = event.end_offset;
 
 					var params = {
 						FunctionName: context.functionName,
 						InvocationType: 'Event',
-						Payload: JSON.stringify(payload),
+						Payload: JSON.stringify(event),
 						Qualifier: context.functionVersion
 					};
 					
@@ -192,7 +184,7 @@ function finish(event, context, callback) {
 exports.handler = (event, context, callback) => {
 	switch (event.phase) {
 		// Start
-		case (null):
+		case (undefined):
 			start(event, context, callback);
 			break;
 			
