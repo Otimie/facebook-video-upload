@@ -2,7 +2,7 @@
 	"name": "facebook-video-upload",
 	"version": "1.0.0",
 	"scripts": {
-		"pretest": "eslint",
+		"pretest": "eslint .",
 		"test": "node index.js"	
 	},
 	"dependencies": {
