@@ -6,11 +6,11 @@
 		"test": "node index.js"	
 	},
 	"dependencies": {
-		"eslint": "4.14.0",
 		"form-data": "2.3.1"
 	},
 	"devDependencies": {
-		"aws-sdk": "2.173.0"
+		"aws-sdk": "2.173.0",
+		"eslint": "4.14.0",
 	},
 	"private": true
 }
