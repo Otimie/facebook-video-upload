@@ -9,7 +9,7 @@ deploy:
   provider: lambda
   function_name: "facebook-video-upload"
   region: "ap-southeast-2"
-  role: ""
+  role: "arn:aws:iam::659947208484:role/FacebookVideoUpload"
   runtime: "nodejs6.10"
   handler_name: "handler"
   access_key_id: "AKIAITUYWUKTAVBTBUFQ"
