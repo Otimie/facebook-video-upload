@@ -26,7 +26,7 @@ function start(event, context, callback) {
 			var request = https.request({
 				method: 'POST',
 				host: 'graph-video.facebook.com',
-				path: '/v2.11/' + event.node_id + '/videos',
+				path: '/v2.12/' + event.node_id + '/videos',
 				headers: form.getHeaders()
 			});
 
@@ -97,7 +97,7 @@ function transfer(event, context, callback) {
 			var request = https.request({
 				method: 'POST',
 				host: 'graph-video.facebook.com',
-				path: '/v2.11/' + event.node_id + '/videos',
+				path: '/v2.12/' + event.node_id + '/videos',
 				headers: form.getHeaders()
 			});
 
@@ -141,7 +141,7 @@ function transfer(event, context, callback) {
 				});
 			});
 		}
-	});	
+	});
 }
 
 function finish(event, context, callback) {
@@ -162,7 +162,7 @@ function finish(event, context, callback) {
 	var request = https.request({
 		method: 'post',
 		host: 'graph-video.facebook.com',
-		path: '/v2.11/' + event.node_id + '/videos',
+		path: '/v2.12/' + event.node_id + '/videos',
 		headers: form.getHeaders()
 	});
 
