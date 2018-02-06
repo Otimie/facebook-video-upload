@@ -12,5 +12,5 @@ deploy:
   role:
   runtime: "nodejs6.10"
   handler_name: "handler"
-  access_key_id:
+  access_key_id: "AKIAITUYWUKTAVBTBUFQ"
   secret_access_key:
