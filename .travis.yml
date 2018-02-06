@@ -5,3 +5,12 @@ install:
   - npm install
 script:
   - npm test
+deploy:
+  provider: lambda
+  function_name: "facebook-video-upload"
+  region: "ap-southeast-2"
+  role:
+  runtime: "nodejs6.10"
+  handler_name: "handler"
+  access_key_id:
+  secret_access_key:
