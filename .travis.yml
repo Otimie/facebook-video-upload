@@ -5,3 +5,13 @@ install:
   - npm install
 script:
   - npm test
+deploy:
+  provider: lambda
+  function_name: "facebook-video-upload"
+  region: "ap-southeast-2"
+  role: "arn:aws:iam::659947208484:role/FacebookVideoUpload"
+  runtime: "nodejs6.10"
+  handler_name: "handler"
+  access_key_id: "AKIAITUYWUKTAVBTBUFQ"
+  secret_access_key:
+    secure: "RccbkTgLSooUsUPj+me6ZOVMf0akfTeod7/bKZOMoOYo5Jy5Jwsf3tr0SOqUDFFHxqpS6qNvFJJJ3miNzF2/9VA/4ih+yQ7GkP9dteSLD1UXngsm7vwd2katk0rCEFsD0cm+KQqyPQowByCaiwvBRD/dkIfqFZxW73pniOz5XgRUmw07WHJ+ZbG5v6vQhF8bYwjetV7S6B6iUoqT+YoJRpSdY8JQFjGmRVE+jHGG/bhqun7DCkgIvh5aV2LBGR7xxR9Agt4RYg2eX3P9FxrBufMyXh88Wff5ra/wZk2aXZkTYDahQxwbbEYEv+SyT73la5DALEaZRPPOPoBOrWHyebbP7rguZQSlr9NlpVB0Ce7UVCd4VQKdbQNI/1v4I+LkwRuT1ntuvi9SxvqO09nm2wtNwGZpCOOC03pAA4QUoH3a5WgFV6KXm2sk0Y6jEUT9+aUQuejs05acoDKffn1/MI0b0RLtCkn/wl837ytesBFotdrovufy83puvynF0xmzh9eUAXKSDF8PRiglZK3vLqMnr6Mh+xXOWVjxF/zdqpUXLx6/ZD7fTk2cYp40h2n7RrURz6kvGfijjYPR+wG3Lfwq7PAxGqXg3JEnYAPL7lCGHnLpJqb3gtupSf/ONjj2RRFyUTNUW0VWT/wkvqgJgHA6bOrRdVjxOQerXynsoyw="
