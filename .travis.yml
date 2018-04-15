@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "6.10"
+  - "8.10"
 install:
   - npm install
 script:
@@ -10,7 +10,7 @@ deploy:
   function_name: "facebook-video-upload"
   region: "ap-southeast-2"
   role: "arn:aws:iam::659947208484:role/FacebookVideoUpload"
-  runtime: "nodejs6.10"
+  runtime: "nodejs8.10"
   handler_name: "handler"
   timeout: 3
   memory_size: 128
