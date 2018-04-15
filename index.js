@@ -172,11 +172,12 @@ function finish(event, context, callback) {
 
 	request.on('response', (response) => {
 		
-		var body = '';
+		//var body = '';
 		
-		response.on('data', (data) => {
-			body += data;
-		});
+		//response.on('data', (data) => {
+		//	body += data;
+		//});
+
 		response.on('end', () => {
 			callback(null);
 		});
