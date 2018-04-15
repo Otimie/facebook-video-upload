@@ -58,7 +58,7 @@ function start(event, context, callback) {
 						Qualifier: context.functionVersion
 					};
 					
-					lambda.invoke(params, (error, data) => {
+					lambda.invoke(params, (error) => {
 						if (error) {
 							callback(error);
 						}
