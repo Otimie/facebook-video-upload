@@ -48,7 +48,7 @@ function start(event, context, callback) {
 					var payload = JSON.parse(body);
 
 					if (payload.error) {
-						callback(payload.error);
+						callback(JSON.stringify(payload.error));
 					}
 					else {
 						Object.assign(event, payload);
