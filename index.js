@@ -24,7 +24,7 @@ function start(event, context, callback) {
 			form.append('access_token', event.access_token);
 			form.append('upload_phase', 'start');
 			form.append('file_size', data.ContentLength);
-			
+
 			var request = https.request({
 				method: 'POST',
 				host: 'graph-video.facebook.com',
@@ -47,25 +47,30 @@ function start(event, context, callback) {
 					// Populate upload_session_id, video_id, start_offset & end_offset
 					var payload = JSON.parse(body);
 
-					Object.assign(event, payload);
-					
-					event.phase = 'transfer';
-										
-					var params = {
-						FunctionName: context.functionName,
-						InvocationType: 'Event',
-						Payload: JSON.stringify(event),
-						Qualifier: context.functionVersion
-					};
-					
-					lambda.invoke(params, (error) => {
-						if (error) {
-							callback(error);
-						}
-						else {
-							callback(null);
-						}
-					});
+					if (payload.error) {
+						callback(payload.error);
+					}
+					else {
+						Object.assign(event, payload);
+
+						event.phase = 'transfer';
+
+						var params = {
+							FunctionName: context.functionName,
+							InvocationType: 'Event',
+							Payload: JSON.stringify(event),
+							Qualifier: context.functionVersion
+						};
+
+						lambda.invoke(params, (error) => {
+							if (error) {
+								callback(error);
+							}
+							else {
+								callback(null);
+							}
+						});
+					}
 				});
 			});
 		}
