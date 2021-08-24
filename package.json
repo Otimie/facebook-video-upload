@@ -9,7 +9,7 @@
 		"form-data": "4.0.0"
 	},
 	"devDependencies": {
-		"aws-sdk": "2.973.0",
+		"aws-sdk": "2.974.0",
 		"eslint": "4.19.1"
 	},
 	"private": true
