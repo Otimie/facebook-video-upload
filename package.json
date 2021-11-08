@@ -10,7 +10,7 @@
 	},
 	"devDependencies": {
 		"aws-sdk": "2.990.0",
-		"eslint": "7.32.0"
+		"eslint": "8.2.0"
 	},
 	"private": true
 }
